@@ -6,22 +6,35 @@ var bot = new Discord.Client();
 // message triggers
 
 // BYE TRIGGER
+var responseObject_bye = {
+  "bye": "bye!",
+  "see you later": "alligator!",
+  "see ya": "you too!",
+  "c ya": "bye",
+  "gn": "good night!",
+  "night": "night!",
+  "good night": "sleep tight!"
+}
+
 bot.on("message", msg => {
-  if (msg.content.match("bye") != null || msg.content.match("see you later") != null || msg.content.match("see ya") != null || msg.content.match("c ya") != null) {
-    if (msg.author.username == "the real halo") {
-    } else {
-      msg.channel.sendMessage("bye!");
-    }
+  if (responseObject_hi[msg.content]) {
+    msg.channel.sendMessage(responseObject_bye[msg.content]);
   }
 });
 
 // HI TRIGGER
+var responseObject_hi = {
+  "hi": "heyo!",
+  "hello": "hi!",
+  "hai": "hoi",
+  "hey": "aye!"
+  "hi there": "ahoy there"
+  "what's up": "iss all good in da hood"
+}
+
 bot.on("message", msg => {
-  if (msg.content.match("hi") != null || msg.content.match("hello") != null || msg.content.match("hai") != null || msg.content.match("hey") != null) {
-    if (msg.author.username == "the real halo") {
-    } else {
-      msg.channel.sendMessage("hiii!");
-    }
+  if (responseObject_hi[msg.content]) {
+    msg.channel.sendMessage(responseObject_hi[msg.content]);
   }
 });
 
