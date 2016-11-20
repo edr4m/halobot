@@ -2,6 +2,9 @@
 
 var Discord = require("discord.js");
 var bot = new Discord.Client();
+var fs = require('fs');
+
+var config;
 
 // message triggers
 
@@ -17,7 +20,7 @@ var responseObject_bye = {
 }
 
 bot.on("message", msg => {
-  if (responseObject_hi[msg.content]) {
+  if (responseObject_bye[msg.content]) {
     msg.channel.sendMessage(responseObject_bye[msg.content]);
   }
 });
@@ -27,9 +30,10 @@ var responseObject_hi = {
   "hi": "heyo!",
   "hello": "hi!",
   "hai": "hoi",
-  "hey": "aye!"
-  "hi there": "ahoy there"
-  "what's up": "iss all good in da hood"
+  "hey": "aye!",
+  "hi there": "ahoy there",
+  "what's up": "iss all good in da hood",
+  "whats up": "iss all good in da hood"
 }
 
 bot.on("message", msg => {
@@ -66,6 +70,14 @@ bot.on("message", msg => {
       msg.channel.sendMessage("mr and mrs snails");
     } else if (ship1.toLowerCase() == "jordan" && ship2.toLowerCase() == "emma") {
       msg.channel.sendMessage("mr and mrs snails :heartpulse:");
+    } else if (ship1.toLowerCase() == "ruby" && ship2.toLowerCase() == "sapphire") {
+      msg.channel.sendMessage("garnet");
+    } else if (ship1.toLowerCase() == "rose" && ship2.toLowerCase() == "greg") {
+      msg.channel.sendMessage("steven");
+    } else if (ship1.toLowerCase() == "amethyst" && ship2.toLowerCase() == "pearl") {
+      msg.channel.sendMessage("and steven! :D");
+    } else if (ship1.toLowerCase() == "greg" && ship2.toLowerCase() == "van") {
+      msg.channel.sendMessage("wtf?");
     } else {
       ship1half = "";
       ship2half = "";
@@ -81,10 +93,53 @@ bot.on("message", msg => {
   }
 })
 
-// essentials
+/*bot.on('message', msg => {
+  currentDate = new Date();
+  //if (msg.channel.name == "vent" && currentDate.getHours() == 1 && currentDate.getMinutes() == 50 && currentDate.getSeconds == 0) {
+  //  msg.channel.sendMessage("Daily reset begins in **5 minutes**.");
+  //}
+  //if (msg.channel.name == "vent" && currentDate.getHours() == 1 && currentDate.getMinutes() == 54 && currentDate.getSeconds == 55) {
+  //  msg.channel.sendMessage("Daily reset begins in **5 seconds**.");
+  //}
+  if (msg.channel.name == "vent" && currentDate.getHours() == 2 && currentDate.getMinutes() == 15 && currentDate.getSeconds() < 30) {
+    msg.channel.messages.deleteAll();
+  } else if (msg.channel.name == "vent" && currentDate.getHours() == 2 && currentDate.getMinutes() == 15 && currentDate.getSeconds() > 30) {
+    msg.channel.messages.deleteAll();
+  }
+  if (msg.channel.name == "vent" && currentDate.getHours() == 2 && currentDate.getMinutes() == 15 && currentDate.getSeconds() == 0) {
+      msg.channel.sendMessage("Daily reset complete.");
+  }
+});*/
 
-bot.on('ready', () => {
-  console.log('HALOBOT ONLINE');
+// data
+
+bot.on('message', msg => {
+  if (msg.content.match("data return channel") != null) {
+    msg.channel.sendMessage(msg.channel);
+  } else if (msg.content.match("data return user") != null) {
+    msg.channel.sendMessage(msg.author);
+  }
 });
 
-bot.login("MjQ5NDIwNzc5NDU5MDUxNTIx.CxGC8A.AZvduN1ZMAJljf4wc_Q_lc5JSYI");
+
+// functions
+
+function loadConfiguration(callback) {
+  console.log('config.json detected.');
+  config = JSON.parse(fs.readFileSync('config.json'));
+  console.log('Read configuration from `config.json`.');
+
+  if (config.token === undefined || config.token.length < 1) {
+    console.log('No bot token is set.');
+  } else {
+    bot.login(config.token);
+  }
+}
+
+// essentials
+
+loadConfiguration();
+
+bot.on('ready', () => {
+  console.log('HALOBOT ONLINE :D');
+});
