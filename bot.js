@@ -4,7 +4,15 @@ var Discord = require("discord.js");
 var bot = new Discord.Client();
 var fs = require('fs');
 
+// global vars
+
 var config;
+var jaredInfo = {
+  id: '236715184251469825',
+  username: '2D (Undead Speaker)',
+  discriminator: '6748',
+  avatar: '45e8fee6889688cd3547cb6216adb69c',
+  bot: false }
 
 // message triggers
 
@@ -16,12 +24,14 @@ var responseObject_bye = {
   "c ya": "bye",
   "gn": "good night!",
   "night": "night!",
-  "good night": "sleep tight!"
+  "good night": "sleep tight!",
+  "c ya nerds": "ur a nerd",
+  "you got me there": "i know i did :3"
 }
 
 bot.on("message", msg => {
-  if (responseObject_bye[msg.content]) {
-    msg.channel.sendMessage(responseObject_bye[msg.content]);
+  if (responseObject_bye[msg.content.toLowerCase()]) {
+    msg.channel.sendMessage(responseObject_bye[msg.content.toLowerCase()]);
   }
 });
 
@@ -33,12 +43,43 @@ var responseObject_hi = {
   "hey": "aye!",
   "hi there": "ahoy there",
   "what's up": "iss all good in da hood",
-  "whats up": "iss all good in da hood"
+  "whats up": "iss all good in da hood",
+  "hoi": "hOI!!1!",
+  "hoy": "ye",
+  "fish": "fish is not a greeting",
+  "ayy": "stfu spoopy"
 }
 
 bot.on("message", msg => {
-  if (responseObject_hi[msg.content]) {
-    msg.channel.sendMessage(responseObject_hi[msg.content]);
+  if (responseObject_hi[msg.content.toLowerCase()]) {
+    msg.channel.sendMessage(responseObject_hi[msg.content.toLowerCase()]);
+  }
+});
+
+// AMBIGUOUS TRIGGERS
+var responseObject_ambiguous = {
+  "i love you": "i ship it",
+  "i love you halo": "you dont love me? :broken_heart: "
+  "i love you halobot": "<3",
+}
+
+bot.on("message", msg => {
+  if (responseObject_ambiguous[msg.content.toLowerCase()]) {
+    msg.channel.sendMessage(responseObject_ambiguous[msg.content.toLowerCase()]);
+  }
+});
+
+// JARED TRIGGER
+var responseObject_jared = {
+  "this is jared": "im jared",
+  "im jared": "no, *im* jared",
+  "i'm jared": "THIS IS THE REAL JARED",
+  "jared is that you": "it is i"
+}
+
+bot.on("message", msg => {
+  if (responseObject_jared[msg.content.toLowerCase()]) {
+    msg.channel.sendMessage(responseObject_jared[msg.content.toLowerCase()]);
   }
 });
 
@@ -93,6 +134,9 @@ bot.on("message", msg => {
   }
 })
 
+;
+
+// VENT RESET
 /*bot.on('message', msg => {
   currentDate = new Date();
   //if (msg.channel.name == "vent" && currentDate.getHours() == 1 && currentDate.getMinutes() == 50 && currentDate.getSeconds == 0) {
@@ -110,6 +154,13 @@ bot.on("message", msg => {
       msg.channel.sendMessage("Daily reset complete.");
   }
 });*/
+
+// JARED SPAMMER
+bot.on('message', msg => {
+  if (msg.content == "activate jared") {
+    msg.channel.sendMessage(jaredInfo);
+  }
+});
 
 // data
 
