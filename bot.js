@@ -1,4 +1,4 @@
-// initialization
+﻿// initialization
 
 var Discord = require("discord.js");
 var bot = new Discord.Client();
@@ -13,73 +13,15 @@ var jaredInfo = {
   discriminator: '6748',
   avatar: '45e8fee6889688cd3547cb6216adb69c',
   bot: false }
+var responseObjects = {};
 
-// message triggers
-
-// BYE TRIGGER
-var responseObject_bye = {
-  "bye": "bye!",
-  "see you later": "alligator!",
-  "see ya": "you too!",
-  "c ya": "bye",
-  "gn": "good night!",
-  "night": "night!",
-  "good night": "sleep tight!",
-  "c ya nerds": "ur a nerd",
-  "you got me there": "i know i did :3"
-}
+// message triggerer
 
 bot.on("message", msg => {
-  if (responseObject_bye[msg.content.toLowerCase()]) {
-    msg.channel.sendMessage(responseObject_bye[msg.content.toLowerCase()]);
-  }
-});
-
-// HI TRIGGER
-var responseObject_hi = {
-  "hi": "heyo!",
-  "hello": "hi!",
-  "hai": "hoi",
-  "hey": "aye!",
-  "hi there": "ahoy there",
-  "what's up": "iss all good in da hood",
-  "whats up": "iss all good in da hood",
-  "hoi": "hOI!!1!",
-  "hoy": "ye",
-  "fish": "fish is not a greeting",
-  "ayy": "stfu spoopy"
-}
-
-bot.on("message", msg => {
-  if (responseObject_hi[msg.content.toLowerCase()]) {
-    msg.channel.sendMessage(responseObject_hi[msg.content.toLowerCase()]);
-  }
-});
-
-// AMBIGUOUS TRIGGERS
-var responseObject_ambiguous = {
-  "i love you": "i ship it",
-  "i love you halo": "you dont love me? :broken_heart: "
-  "i love you halobot": "<3",
-}
-
-bot.on("message", msg => {
-  if (responseObject_ambiguous[msg.content.toLowerCase()]) {
-    msg.channel.sendMessage(responseObject_ambiguous[msg.content.toLowerCase()]);
-  }
-});
-
-// JARED TRIGGER
-var responseObject_jared = {
-  "this is jared": "im jared",
-  "im jared": "no, *im* jared",
-  "i'm jared": "THIS IS THE REAL JARED",
-  "jared is that you": "it is i"
-}
-
-bot.on("message", msg => {
-  if (responseObject_jared[msg.content.toLowerCase()]) {
-    msg.channel.sendMessage(responseObject_jared[msg.content.toLowerCase()]);
+  for (i = 0; i < fs.readdirSync('plugins/triggers').length; i++) {
+    if (responseObjects[fs.readdirSync('plugins/triggers')[i]][msg.content.toLowerCase()]) {
+      msg.channel.sendMessage(responseObjects[fs.readdirSync('plugins/triggers')[i]][msg.content.toLowerCase()]);
+    }
   }
 });
 
@@ -145,12 +87,12 @@ bot.on("message", msg => {
   //if (msg.channel.name == "vent" && currentDate.getHours() == 1 && currentDate.getMinutes() == 54 && currentDate.getSeconds == 55) {
   //  msg.channel.sendMessage("Daily reset begins in **5 seconds**.");
   //}
-  if (msg.channel.name == "vent" && currentDate.getHours() == 2 && currentDate.getMinutes() == 15 && currentDate.getSeconds() < 30) {
+  if (msg.channel.name == "vent" && currentDate.getHours() == 2 && currentDate.getMinutes() == 30 && currentDate.getSeconds() < 30) {
     msg.channel.messages.deleteAll();
-  } else if (msg.channel.name == "vent" && currentDate.getHours() == 2 && currentDate.getMinutes() == 15 && currentDate.getSeconds() > 30) {
+  } else if (msg.channel.name == "vent" && currentDate.getHours() == 2 && currentDate.getMinutes() == 30 && currentDate.getSeconds() > 30) {
     msg.channel.messages.deleteAll();
   }
-  if (msg.channel.name == "vent" && currentDate.getHours() == 2 && currentDate.getMinutes() == 15 && currentDate.getSeconds() == 0) {
+  if (msg.channel.name == "vent" && currentDate.getHours() == 2 && currentDate.getMinutes() == 30 && currentDate.getSeconds() == 0) {
       msg.channel.sendMessage("Daily reset complete.");
   }
 });*/
@@ -176,14 +118,19 @@ bot.on('message', msg => {
 // functions
 
 function loadConfiguration(callback) {
-  console.log('config.json detected.');
   config = JSON.parse(fs.readFileSync('config.json'));
   console.log('Read configuration from `config.json`.');
 
   if (config.token === undefined || config.token.length < 1) {
-    console.log('No bot token is set.');
+    console.log('No bot token is set in config.json.');
   } else {
     bot.login(config.token);
+  }
+
+  if (fs.readdirSync('plugins/triggers') != undefined || fs.readdirSync('plugins/triggers').length > 0) {
+    for (i = 0; i < fs.readdirSync('plugins/triggers').length; i++) {
+      responseObjects[fs.readdirSync('plugins/triggers')[i]] = JSON.parse(fs.readFileSync('./plugins/triggers/' + fs.readdirSync('plugins/triggers')[i]))
+    }
   }
 }
 
@@ -192,5 +139,5 @@ function loadConfiguration(callback) {
 loadConfiguration();
 
 bot.on('ready', () => {
-  console.log('HALOBOT ONLINE :D');
+  console.log('HALOBOT ONLINE :3');
 });

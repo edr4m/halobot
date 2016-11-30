@@ -1,0 +1,13 @@
+{
+    "name": "halobot",
+    "version": "0.3.0",
+    "description": "A fun discord bot that does everything",
+    "keywords": ["discord", "bot", "chatbot"],
+    "repository": "https://github.com/uniqueusername/halobot",
+    "author": "Aryan Jha <aryan@jha.io>",
+    "dependencies": {
+      "discord.js": "*",
+    },
+    "main": "bot.js",
+    }
+}
