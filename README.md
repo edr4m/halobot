@@ -6,10 +6,10 @@ A fun Discord.js bot designed to do nothing in specific.
 
 ## Usage
 
-  $ git clone git@github.com/uniqueusername/halobot.git
-  $ cd halobot
-  $ npm install
-  $ node bot.js
+    $ git clone git@github.com/uniqueusername/halobot.git
+    $ cd halobot
+    $ npm install
+    $ node bot.js
 
 ## Configuration
 
@@ -20,27 +20,27 @@ Before using the bot, you may need to set some things up.
 To run the bot on your own server, you'll have to give it a token (you can find your token on your bot's application on the Discord Developers "My Application" page).
 The bot token is located in the config.json file.
 
-  "token": "MjUzMzQ3MDE4NDIzMDA5Mjgx.Cx_LXg.BSRa9KpSA3NOHw3NP-NnyAFLd-A"
+    "token": "MjUzMzQ3MDE4NDIzMDA5Mjgx.Cx_LXg.BSRa9KpSA3NOHw3NP-NnyAFLd-A"
 
 ### Triggers/Responses
 
 Halobot can automatically respond to certain messages (triggers) with specific phrases (responses). Halobot's modular plugin system allows you to easily add custom triggers and responses.
 Under the 'plugins/triggers' folder, create a JSON file with a name of your choice.
 
-  {
-    "hi": "heyo!",
-    "hello": "hi!",
-    "hai": "hoi",
-    "hey": "aye!",
-    "hi there": "ahoy there",
-    "what's up": "iss all good in da hood",
-    "whats up": "iss all good in da hood",
-    "hoi": "hOI!!1!",
-    "hoy": "ye",
-    "fish": "fish is not a greeting",
-    "ayy": "stfu spoopy",
-    "hola": "¡hola, mi tesoro!"
-  }
+    {
+      "hi": "heyo!",
+      "hello": "hi!",
+      "hai": "hoi",
+      "hey": "aye!",
+      "hi there": "ahoy there",
+      "what's up": "iss all good in da hood",
+      "whats up": "iss all good in da hood",
+      "hoi": "hOI!!1!",
+      "hoy": "ye",
+      "fish": "fish is not a greeting",
+      "ayy": "stfu spoopy",
+      "hola": "¡hola, mi tesoro!"
+    }
 
 Enter any trigger/response combination you want, as long as the trigger is on the left column, and the response is on the right.
 
