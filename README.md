@@ -25,7 +25,7 @@ The bot token is located in the config.json file.
 ### Triggers/Responses
 
 Halobot can automatically respond to certain messages (triggers) with specific phrases (responses). Halobot's modular plugin system allows you to easily add custom triggers and responses.
-Under the 'plugins/triggers' folder, create a JSON file with a name of your choice.
+Under the '/plugins/triggers' folder, create a JSON file with a name of your choice.
 
     {
       "hi": "heyo!",
@@ -43,6 +43,25 @@ Under the 'plugins/triggers' folder, create a JSON file with a name of your choi
     }
 
 Enter any trigger/response combination you want, as long as the trigger is on the left column, and the response is on the right.
+
+### Ship Presets
+
+You can set your own presets for certain ships with the ship command.
+Under the '/plugins/' folder, create a JSON file called ships.json.
+
+    {
+      "ruby": {
+        "sapphire": "garnet",
+        "ruby": "big ruby"
+      },
+
+      "steven": {
+        "connie": "stevonnie",
+        "sadie": "what"
+      }
+    }
+
+To set a custom ship, first choose the first person in your ship. Use this name as the left column and put another JSON dictionary in the right column. Under this smaller dictionary, the left column is the second name in your ship, and the right column is the resulting ship name, as shown in the example above.
 
 ## Features
 
