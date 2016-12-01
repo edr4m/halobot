@@ -34,11 +34,9 @@ bot.on("message", msg => {
     shipArray = msg.content.split(" x ");
     ship1 = shipArray[0];
     ship2 = shipArray[1];
-    
-    if (shipObjects[ship1]) {
-      if (shipObjects[ship1][ship2]) {
+
+    if (shipObjects[ship1][ship2]) {
         msg.channel.sendMessage(shipObjects[ship1][ship2]);
-      }
     } else {
       ship1half = "";
       ship2half = "";
