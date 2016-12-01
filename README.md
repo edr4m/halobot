@@ -4,8 +4,6 @@ A fun [Discord.js](https://discord.js.org/#/) bot designed to do nothing in spec
 
 [Add Halobot to your server.](https://discordapp.com/oauth2/authorize?client_id=249989082128711683&scope=bot)
 
-[Halobot in action.](http://i.imgur.com/DW4B66c.png)
-
 ## Usage
 
     $ git clone git@github.com/uniqueusername/halobot.git
