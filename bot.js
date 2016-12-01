@@ -35,8 +35,21 @@ bot.on("message", msg => {
     ship1 = shipArray[0];
     ship2 = shipArray[1];
 
-    if (shipObjects[ship1][ship2]) {
+    if (shipObjects[ship1]) {
+      if (shipObjects[ship1][ship2]) {
         msg.channel.sendMessage(shipObjects[ship1][ship2]);
+      } else {
+        ship1half = "";
+        ship2half = "";
+        for (i = 0; i < Math.round(ship1.length/2); i++)  {
+          ship1half += ship1[i];
+        }
+        for (i = Math.round(ship2.length/2); i < ship2.length; i++) {
+          ship2half += ship2[i];
+        }
+        finalShip = ship1half + ship2half;
+        msg.channel.sendMessage(finalShip);
+      }
     } else {
       ship1half = "";
       ship2half = "";
