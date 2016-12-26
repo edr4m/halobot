@@ -6,8 +6,7 @@
     "repository": "https://github.com/uniqueusername/halobot",
     "author": "Aryan Jha <aryan@jha.io>",
     "dependencies": {
-      "discord.js": "*",
+      "discord.js": "*"
     },
-    "main": "bot.js",
-    }
+    "main": "bot.js"
 }
